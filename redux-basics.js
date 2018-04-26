@@ -41,7 +41,11 @@ console.log(store.getState()); //its a func that pulls out the state from the st
 
 // Subscription
 //subscribe takes an argument, a funct which will be executed when the state is updated, 
-//so whenever action is dispatched to reach reducer and mutates the store..
+//so whenever action is dispatched to reach reducer and mutates the store.
+
+// Subscription should go before the dispatching, otherwise you'll miss that dispatch as the subscription is set up too late.
+// So first write subscription, then dispatch
+
 
 store.subscribe(() => {
     console.log('[Subscription]', store.getState());
