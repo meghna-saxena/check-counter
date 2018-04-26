@@ -10,6 +10,7 @@ const counterOutput = (props) => (
         <div>
             <Circle
                 progress={props.value}
+                
                 animate={true} // Boolean: Animated/Static progress
                 responsive={true} // Boolean: Make SVG adapt to parent size
                 size={150} // Number: Defines the size of the circle.
