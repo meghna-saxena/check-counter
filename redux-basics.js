@@ -3,7 +3,9 @@ const redux = require('redux');
 const createStore = redux.createStore;
 
 //initializing state
-const initialState = { counter: 0 };
+const initialState = {
+    counter: 0
+}
 
 
 // Reducer
@@ -20,26 +22,35 @@ const rootReducer = (state = initialState, action) => { //set default state
             //and if that's also a js object, first copy that too so to avoid mutating any data
             counter: state.counter + 1
         };
-        if (action.type === 'ADD_COUNTER') {
-            return {
-                ...state,
-                counter: state.counter + action.value
-            };
-        }
-        return state;   
     }
-}
+    if (action.type === 'ADD_COUNTER') {
+        return {
+            ...state,
+            counter: state.counter + action.value
+        };
+    }
+    return state;
+};
 
 
-    // Store
-    const store = createStore(rootReducer);
-    console.log(store.getState()); //its a func that pulls out the state from the store
-    // this is the first console log when store is initalized returning initial state
-
-    // Dispatching Action
-    store.dispatch({ type: 'INC_COUNTER' });
-    store.dispatch({ type: 'ADD_COUNTER', value: 10 });
-    console.log(store.getState());
+// Store
+const store = createStore(rootReducer);
+console.log(store.getState()); //its a func that pulls out the state from the store
+// this is the first console log when store is initalized returning initial state
 
 
 // Subscription
+//subscribe takes an argument, a funct which will be executed when the state is updated, 
+//so whenever action is dispatched to reach reducer and mutates the store..
+
+store.subscribe(() => {
+    console.log('[Subscription]', store.getState());
+})
+
+
+// Dispatching Action
+store.dispatch({ type: 'INC_COUNTER' });
+store.dispatch({ type: 'ADD_COUNTER', value: 10 });
+console.log(store.getState());
+
+
