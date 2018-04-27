@@ -1,3 +1,5 @@
+import * as actionTypes from './actions';
+
 const initialState = {
     counter: 0,
     results: []
@@ -5,27 +7,27 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case 'INCREMENT':
+        case actionTypes.INCREMENT:
             return {
                 ...state,
                 counter: state.counter + 1 //changing state immutably
             }
-        case 'DECREMENT':
+        case actionTypes.DECREMENT:
             return {
                 ...state,
                 counter: state.counter - 1
             }
-        case 'ADD':
+        case actionTypes.ADD:
             return {
                 ...state,
                 counter: state.counter + action.value
             }
-        case 'SUBTRACT':
+        case actionTypes.SUBTRACT:
             return {
                 ...state,
                 counter: state.counter - action.value
             }
-        case 'STORE_RESULT':
+        case actionTypes.STORE_RESULT:
             return {
                 ...state, //distribute the old state
                 results: state.results.concat({ id: new Date(), value: state.counter })
@@ -33,7 +35,7 @@ const reducer = (state = initialState, action) => {
                 // concat() method returns a new array so we are indeed updating immutably there
                 //id corresponds to new date, i.e when is the item added
             }
-        case 'DELETE_RESULT':
+        case actionTypes.DELETE_RESULT:
             // 1st method
             //     const id = 2
             //     const newArray = [...state.results]
